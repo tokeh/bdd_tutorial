@@ -37,7 +37,7 @@ class BookSearch extends FeatureSpec with GivenWhenThen {
       And("Book 1 should have the title 'Some other book'")
         result.get(0).getTitle should equal ("Some other book")
       And("Book 2 should have the title 'One good book'")
-        result.get(0).getTitle should equal ("One good book")
+        result.get(1).getTitle should equal ("One good book")
     }
   }
 }

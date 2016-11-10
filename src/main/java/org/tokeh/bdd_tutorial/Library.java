@@ -26,7 +26,7 @@ public class Library {
     }
 
     Collections.sort(list, (Book book1, Book book2) ->
-        Integer.compare(book1.getPublished().getYear(), book2.getPublished().getYear()));
+        Integer.compare(book2.getPublished().getYear(), book1.getPublished().getYear()));
     return list;
   }
 }
