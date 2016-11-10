@@ -11,22 +11,23 @@ import org.tokeh.bdd_tutorial.Library;
 import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class BookSearchSteps {
   private final Library library = new Library();
   private List<Book> result;
 
+  private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
   @Given(".+book with the title '(.+)', written by '(.+)', published on (.+)")
-  public void addNewBook(final String title, final String author, @Format("dd.MM.yyyy") final Date published) {
-    this.library.addBook(new Book(title, author, convertToLocalDate(published)));
+  public void addNewBook(final String title, final String author, final String published) {
+    this.library.addBook(new Book(title, author, LocalDate.parse(published, dateTimeFormatter)));
   }
 
   @When("^the customer searches for books published between (\\d+) and (\\d+)$")
-  public void setSearchParameters(@Format("yyyy") final Date from, @Format("yyyy") final Date to) {
-    result = library.findBooks(convertToLocalDate(from), convertToLocalDate(to));
+  public void setSearchParameters(final int from, final int to) {
+    result = library.findBooks(LocalDate.now().withYear(from), LocalDate.now().withYear(to));
   }
 
   @Then("(\\d+) books should have been found$")
@@ -37,9 +38,5 @@ public class BookSearchSteps {
   @And("Book (\\d+) should have the title '(.+)'$")
   public void verifyBookAtPosition(final int position, final String title) {
     assertEquals(result.get(position - 1).getTitle(), title);
-  }
-
-  private LocalDate convertToLocalDate(final Date date) {
-    return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
   }
 }
