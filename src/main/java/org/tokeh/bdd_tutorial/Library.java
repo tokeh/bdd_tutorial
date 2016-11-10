@@ -2,6 +2,7 @@ package org.tokeh.bdd_tutorial;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +28,8 @@ public class Library {
       }
     }
 
+    Collections.sort(list, (Book book1, Book book2) ->
+        Integer.compare(book2.getPublished().getYear(), book1.getPublished().getYear()));
     return list;
   }
 }
