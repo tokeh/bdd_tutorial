@@ -13,7 +13,7 @@ class BookSearchStepsScala extends ScalaDsl with EN {
   private val library: Library = new Library
   private var result: util.ArrayList[Book] = null
 
-  /*Given(""".+book with the title '(.+)', written by '(.+)', published on (.+)""") {
+  Given(""".+book with the title '(.+)', written by '(.+)', published on (.+)""") {
     (title: String, author: String, published: String) => this.library.addBook(new Book(title, author, DateTime.parse(published)))
   }
 
@@ -27,5 +27,5 @@ class BookSearchStepsScala extends ScalaDsl with EN {
 
   And("""Book (d+) should have the title '(.+)'$""") {
     (position: Int, title: String) => result.get(position - 1).getTitle should equal (title)
-  }*/
+  }
 }
