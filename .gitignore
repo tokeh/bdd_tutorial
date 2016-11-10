@@ -14,7 +14,7 @@
 # Gradle:
 .idea/gradle.xml
 .idea/libraries
-.gradle/2.13/taskArtifacts/
+.gradle
 
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml
@@ -42,3 +42,12 @@ fabric.properties
 # Build
 /build/
 /target/
+
+# Eclipse
+# -------
+*.classpath
+*.project
+*.settings
+/bin
+/subprojects/*/bin
+atlassian-ide-plugin.xml
