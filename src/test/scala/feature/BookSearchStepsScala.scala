@@ -4,7 +4,6 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util
 
-import cucumber.api.java.en.Given
 import cucumber.api.scala.{EN, ScalaDsl}
 import org.tokeh.bdd_tutorial.Book
 import org.tokeh.bdd_tutorial.Library
@@ -15,7 +14,6 @@ class BookSearchStepsScala extends ScalaDsl with EN {
   var result: util.ArrayList[Book] = null
 
   val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-  val yearFormatter = DateTimeFormatter.ofPattern("yyyy")
 
   Given(""".+book with the title '(.+)', written by '(.+)', published on (.+)""") {
     (title: String, author: String, published: String) =>
@@ -23,8 +21,7 @@ class BookSearchStepsScala extends ScalaDsl with EN {
   }
 
   When("""^the customer searches for books published between (\d+) and (\d+)$""") {
-    (from: Int, to: Int) =>
-      result = library.findBooks(LocalDate.now().withYear(from), LocalDate.now().withYear(to))
+    (from: Int, to: Int) => result = library.findBooks(LocalDate.now().withYear(from), LocalDate.now().withYear(to))
   }
 
   Then("""(\d+) books should have been found$""") {
