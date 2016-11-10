@@ -17,4 +17,5 @@ dependencies {
   compile group: 'info.cukes', name: 'cucumber-scala_2.11', version: '1.2.5'
   compile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.5'
   compile "org.scalatest:scalatest_2.12:3.0.0"
+  compile group: 'joda-time', name: 'joda-time', version: '2.3'
 }
