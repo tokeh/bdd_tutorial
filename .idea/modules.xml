@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BDD_Cucumber.iml" filepath="$PROJECT_DIR$/.idea/modules/BDD_Cucumber.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BDD_Cucumber_main.iml" filepath="$PROJECT_DIR$/.idea/modules/BDD_Cucumber_main.iml" group="BDD_Cucumber" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BDD_Cucumber_test.iml" filepath="$PROJECT_DIR$/.idea/modules/BDD_Cucumber_test.iml" group="BDD_Cucumber" />
+    </modules>
+  </component>
+</project>
