@@ -1,6 +1,5 @@
 package feature;
 
-import cucumber.api.Format;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
