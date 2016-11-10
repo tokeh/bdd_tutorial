@@ -4,10 +4,13 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util
 
+import org.junit.runner.RunWith
 import org.scalatest.{FeatureSpec, GivenWhenThen}
 import org.scalatest.Matchers._
+import org.scalatest.junit.JUnitRunner
 import org.tokeh.bdd_tutorial.{Book, Library}
 
+@RunWith(classOf[JUnitRunner])
 class BookSearch extends FeatureSpec with GivenWhenThen {
   private val library: Library = new Library
   private var result: util.ArrayList[Book] = null
