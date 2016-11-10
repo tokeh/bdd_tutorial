@@ -1,7 +1,5 @@
 package org.tokeh.bdd_tutorial;
 
-import org.joda.time.DateTime;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +16,7 @@ public class Library {
     this.books.put(book.getTitle(), book);
   }
 
-  public ArrayList<Book> findBooks(final DateTime from, final DateTime to) {
+  public ArrayList<Book> findBooks(final LocalDate from, final LocalDate to) {
     ArrayList<Book> list = new ArrayList<Book>();
     for (Map.Entry entry : this.books.entrySet()) {
       Book book = (Book) entry.getValue();
