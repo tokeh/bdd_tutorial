@@ -86,6 +86,7 @@ public void addNewBook(final String title, final String author, final String pub
   this.bookSearch.addNewBook(title, author, published);
 }
 ```
+The Serenity report can be found under __/target/site/serenity/index.html__
 
 ###Cucumber with Scala
 Features are written in *Gherkin* and stored in *.feature* files. Gherkin uses the BDD *Given-When-Then* pattern:
@@ -216,6 +217,7 @@ public void addNewBook(final String title, final String author, final String pub
   this.bookSearch.addNewBook(title, author, published);
 }
 ```
+The Serenity report can be found under __/target/site/serenity/index.html__
 
 ###JBehave with Scala
 Glue code
