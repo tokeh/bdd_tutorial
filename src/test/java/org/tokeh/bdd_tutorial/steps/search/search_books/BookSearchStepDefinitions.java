@@ -39,6 +39,6 @@ public class BookSearchStepDefinitions {
 
   @Then("Book $position should have the title $title")
   public void verifyBookAtPosition(final int position, final String title) {
-    this.verifyBookAtPosition(position, title);
+    this.bookSearch.verifyBookAtPosition(position, title);
   }
 }
