@@ -65,27 +65,87 @@ The only disadvantage is that if scenarios are changed the texts of the annotati
 is quite easy because all scenarios that can't be matched are highlighted in the editor (if the right plug-ins are installed) and the corresponding tests are failing.
 
 ###JBehave with Java
+.story files
+```
+Meta:
+
+Narrative:
+As a user
+I want to find books by author
+So that I can see what books were published in a specific time span
+
+Scenario: scenario description
+Given a system state
+When I do something
+Then system is in a different state
+```
 Glue code
 ```java
+@Override
+protected List<String> storyPaths() {
+  return new StoryFinder().findPaths(CodeLocations.codeLocationFromPath("src/test/resources"),
+      "**/*.story", "**/exclude_*.story");
+}
 
+@Override
+public Configuration configuration() {
+  return new MostUsefulConfiguration()
+    .useStoryLoader(new LoadFromClasspath(this.getClass()))
+    .useStoryReporterBuilder(new StoryReporterBuilder()
+    .withFormats(Format.XML, Format.IDE_CONSOLE, Format.CONSOLE, Format.HTML, Format.TXT));
+}
+
+@Override
+public InjectableStepsFactory stepsFactory() {
+  return new InstanceStepsFactory(configuration(), new BookSearchSteps());
+}
 ```
 Implementation
 ```java
-
+@Given("a book with the title $title, written by $author, published on $published")
+@Alias("another book with the title $title, written by $author, published on $published")
+public void addNewBook(final String title, final String author, final String published) {
+  this.library.addBook(new Book(title, author, LocalDate.parse(published, dateTimeFormatter)));
+}
 ```
 
 ###JBehave with Java and Serenity
-Glue code
-```java
+.story files
+```
+Meta:
 
+Narrative:
+As a user
+I want to find books by author
+So that I can see what books were published in a specific time span
+
+Scenario: scenario description
+Given a system state
+When I do something
+Then system is in a different state
+```
+narrative.txt in folders
+Glue code: empty JUnit runner
+```java
+public class AcceptanceTests extends SerenityStories { }
 ```
 Reusable Steps
 ```java
-
+@Step
+public void addNewBook(final String title, final String author, final String published) {
+  this.library.addBook(new Book(title, author, LocalDate.parse(published, dateTimeFormatter)));
+}
 ```
 Step definitions
 ```java
+@Steps
+BookSearchSteps bookSearch;
 
+@Given("a book with the title $title, written by $author, published on $published")
+@Alias("another book with the title $title, written by $author, published on $published")
+public void addNewBook(final String title, final String author, final String published) {
+  this.bookSearch.addNewBook(title, author, published);
+}
 ```
 
 ###JBehave with Scala
@@ -100,5 +160,27 @@ Implementation
 
 ###Plain ScalaTest
 ```scala
+feature("Book search") {
+  info("To allow a customer to find his favourite books quickly, the library must offer multiple ways to search for a book")
 
+  scenario("Search books by publication year") {
+
+    Given("a book with the title 'One good book', written by 'Anonymous', published on 14.03.2013")
+      this.library.addBook(new Book("One good book", "Anonymous", LocalDate.parse("14.03.2013", dateFormatter)))
+    And("another book with the title 'Some other book', written by 'Tim Tomson', published on 23.08.2014")
+      this.library.addBook(new Book("Some other book", "Tim Tomson", LocalDate.parse("23.08.2014", dateFormatter)))
+    And("another book with the title 'How to cook a dino', written by 'Fred Flintstone', published on 01.01.2012")
+      this.library.addBook(new Book("How to cook a dino", "Fred Flintstone", LocalDate.parse("01.01.2012", dateFormatter)))
+
+    When("the customer searches for books published between 2013 and 2014")
+      result = library.findBooks(LocalDate.now().withYear(2013), LocalDate.now().withYear(2014))
+
+    Then("2 books should have been found")
+      result.size should equal(2)
+    And("Book 1 should have the title 'Some other book'")
+      result.get(0).getTitle should equal ("Some other book")
+    And("Book 2 should have the title 'One good book'")
+      result.get(1).getTitle should equal ("One good book")
+  }
+}
 ```
