@@ -31,7 +31,7 @@ Feature: Book search
     Then 2 books should have been found
     And Book 1 should have the title 'Some other book'
 ```
-The mapping between scenarios and implementation is achieved by *Java Annotations* and *pattern matching*. The mapping from
+The mapping between scenarios and implementation is achieved by *Java annotations* and *pattern matching*. The mapping from
 scenario values to parameters is done the same way. That allows writing steps (e.g. __Given__... __And__...) that have the same
 text but different values and mapping them to the same implementation.
 ```java
@@ -65,7 +65,7 @@ better readable test implementation.
 ```scala
 Given(""".+book with the title '(.+)', written by '(.+)', published on (.+)""") {
   (title: String, author: String, published: String) =>
-    this.library.addBook(new Book(title, author, LocalDate.parse(published, dateFormatter)))
+    ...
 }
 ```
 The only disadvantage is that if scenarios are changed the texts of the annotations in the implementation have to be changed as well.
@@ -73,7 +73,8 @@ Finding the texts that have to be changed is quite easy because all scenarios th
 (if the right plug-ins are installed) and the corresponding tests are failing.
 
 ###JBehave with Java
-.story files
+JBehave uses .story files to store the different scenarios. Just like Cucumber features they are written in native language and
+use the BDD *Given-When-THen* pattern:
 ```
 Meta:
 
@@ -87,7 +88,8 @@ Given a system state
 When I do something
 Then system is in a different state
 ```
-Glue code
+JBehave also needs some configuration glue code. That code configures where JBehave has to look for the story files, where the
+step definitions are and how format the output.
 ```java
 @Override
 protected List<String> storyPaths() {
@@ -108,17 +110,20 @@ public InjectableStepsFactory stepsFactory() {
   return new InstanceStepsFactory(configuration(), new BookSearchSteps());
 }
 ```
-Implementation
+The implementation works similar to Cucumber. Scenarios are matched by pattern matching where the text has to be exactly the same.
+If the same implementation should be used for different steps of the scenario the *@Alias* annotation can be used.
+Variables are marked with a *$* and mapped to the corresponding method parameters.
 ```java
 @Given("a book with the title $title, written by $author, published on $published")
 @Alias("another book with the title $title, written by $author, published on $published")
 public void addNewBook(final String title, final String author, final String published) {
-  this.library.addBook(new Book(title, author, LocalDate.parse(published, dateTimeFormatter)));
+  ...
 }
 ```
 
 ###JBehave with Java and Serenity
-.story files
+JBehave uses .story files to store the different scenarios. Just like Cucumber features they are written in native language and
+use the BDD *Given-When-THen* pattern:
 ```
 Meta:
 
@@ -132,19 +137,24 @@ Given a system state
 When I do something
 Then system is in a different state
 ```
-narrative.txt in folders
-Glue code: empty JUnit runner
+In addition to the *narrative* part of the *.story* files all parts like *features*, *capabilities*, etc. can have narrative.txt
+which contain a description in native language. These descriptions are added to the report by Serenity.
+
+Serenity takes care of a lot of the configuration glue code. Only an empty JUnit runner that extends SerenityStories is needed.
 ```java
 public class AcceptanceTests extends SerenityStories { }
 ```
-Reusable Steps
+Serenity extends JBehave in a way that not only *Given-When-Then* steps can be used but also Serenity *Steps*. These steps are
+small reusable chunks of code that are grouped in a normal Java class. This concept supports maintainability and flexibility
+especially in large code bases.
 ```java
 @Step
 public void addNewBook(final String title, final String author, final String published) {
-  this.library.addBook(new Book(title, author, LocalDate.parse(published, dateTimeFormatter)));
+  ...
 }
 ```
-Step definitions
+The implementation of the scenario steps looks almost like the one of plain JBehave. Unlike the plain JBehave code this implementation
+is calling the reusable Serenity *steps* on the *@Step* object instead of calling all the test code directly.
 ```java
 @Steps
 BookSearchSteps bookSearch;
