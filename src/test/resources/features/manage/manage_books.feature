@@ -10,9 +10,18 @@ Feature: Manage books
 
   Scenario: Add multiple books
     # Dummy scenario to show pending scenarios in Serenity report
+    Given a system state
+    When I do something
+    Then system is in a different state
 
   Scenario: Remove single books
     # Dummy scenario to show pending scenarios in Serenity report
+    Given a system state
+    When I do something
+    Then system is in a different state
 
   Scenario: Remove multiple books
     # Dummy scenario to show pending scenarios in Serenity report
+    Given a system state
+    When I do something
+    Then system is in a different state

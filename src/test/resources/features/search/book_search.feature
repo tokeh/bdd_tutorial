@@ -12,6 +12,12 @@ Feature: Book search
 
   Scenario: Search book by author
     # Dummy scenario to show pending scenarios in Serenity report
+    Given a system state
+    When I do something
+    Then system is in a different state
 
   Scenario: Search author by name
     # Dummy scenario to show pending scenarios in Serenity report
+    Given a system state
+    When I do something
+    Then system is in a different state
