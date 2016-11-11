@@ -1,4 +1,4 @@
-package steps;
+package org.tokeh.bdd_tutorial.steps.search.search_books;
 
 import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.Alias;
