@@ -80,13 +80,17 @@ Meta:
 
 Narrative:
 As a user
-I want to find books by author
-So that I can see what books were published in a specific time span
+I want to find books by publication year
+So that I can see what books are available by an author
 
-Scenario: scenario description
-Given a system state
-When I do something
-Then system is in a different state
+Scenario: Search books by publication year
+Given a book with the title 'One good book', written by 'Anonymous', published on 14.03.2013
+And another book with the title 'Some other book', written by 'Tim Tomson', published on 23.08.2014
+And another book with the title 'How to cook a dino', written by 'Fred Flintstone', published on 01.01.2012
+When the customer searches for books published between 2013 and 2014
+Then 2 books should have been found
+And Book 1 should have the title 'Some other book'
+And Book 2 should have the title 'One good book'
 ```
 JBehave also needs some configuration glue code. That code configures where JBehave has to look for the story files, where the
 step definitions are and how format the output.
@@ -117,7 +121,7 @@ Variables are marked with a *$* and mapped to the corresponding method parameter
 @Given("a book with the title $title, written by $author, published on $published")
 @Alias("another book with the title $title, written by $author, published on $published")
 public void addNewBook(final String title, final String author, final String published) {
-  ...
+  this.library.addBook(new Book(title, author, LocalDate.parse(published, dateTimeFormatter)));
 }
 ```
 
@@ -129,13 +133,17 @@ Meta:
 
 Narrative:
 As a user
-I want to find books by author
-So that I can see what books were published in a specific time span
+I want to find books by publication year
+So that I can see what books are available by an author
 
-Scenario: scenario description
-Given a system state
-When I do something
-Then system is in a different state
+Scenario: Search books by publication year
+Given a book with the title 'One good book', written by 'Anonymous', published on 14.03.2013
+And another book with the title 'Some other book', written by 'Tim Tomson', published on 23.08.2014
+And another book with the title 'How to cook a dino', written by 'Fred Flintstone', published on 01.01.2012
+When the customer searches for books published between 2013 and 2014
+Then 2 books should have been found
+And Book 1 should have the title 'Some other book'
+And Book 2 should have the title 'One good book'
 ```
 In addition to the *narrative* part of the *.story* files all parts like *features*, *capabilities*, etc. can have narrative.txt
 which contain a description in native language. These descriptions are added to the report by Serenity.
@@ -150,7 +158,7 @@ especially in large code bases.
 ```java
 @Step
 public void addNewBook(final String title, final String author, final String published) {
-  ...
+  this.library.addBook(new Book(title, author, LocalDate.parse(published, dateTimeFormatter)));
 }
 ```
 The implementation of the scenario steps looks almost like the one of plain JBehave. Unlike the plain JBehave code this implementation
