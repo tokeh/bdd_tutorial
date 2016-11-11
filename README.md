@@ -220,14 +220,50 @@ public void addNewBook(final String title, final String author, final String pub
 The Serenity report can be found under __/target/site/serenity/index.html__
 
 ###JBehave with Scala
-Glue code
-```scala
-
+JBehave uses *.story* files to store the different scenarios. Just like Cucumber features they are written in native language and
+use the BDD *Given-When-Then* pattern:
 ```
-Implementation
-```scala
+Meta:
 
+Narrative:
+As a user
+I want to find books by publication year
+So that I can see what books are available by an author
+
+Scenario: Search books by publication year
+Given a book with the title 'One good book', written by 'Anonymous', published on 14.03.2013
+And another book with the title 'Some other book', written by 'Tim Tomson', published on 23.08.2014
+And another book with the title 'How to cook a dino', written by 'Fred Flintstone', published on 01.01.2012
+When the customer searches for books published between 2013 and 2014
+Then 2 books should have been found
+And Book 1 should have the title 'Some other book'
+And Book 2 should have the title 'One good book'
 ```
+JBehave also needs some configuration glue code. That code configures where JBehave has to look for the story files, where the
+step definitions are and how format the output.
+```scala
+protected def storyPaths: List[String] = new StoryFinder().findPaths(
+  CodeLocations.codeLocationFromPath("src/test/resources"), "**/*.story", "**/exclude_*.story")
+
+override def configuration: Configuration = new MostUsefulConfiguration()
+  .useStoryLoader(new LoadFromClasspath(this.getClass))
+  .useStoryReporterBuilder(new StoryReporterBuilder()
+  .withFormats(Format.XML, Format.IDE_CONSOLE, Format.CONSOLE, Format.HTML, Format.TXT))
+
+override def stepsFactory: InjectableStepsFactory = new InstanceStepsFactory(configuration, new BookSearchSteps)
+```
+The implementation works similar to Cucumber. Scenarios are matched by pattern matching where the text has to be exactly the same.
+If the same implementation should be used for different steps of the scenario the *@Alias* annotation can be used.
+Variables are marked with a *$* and mapped to the corresponding method parameters.
+```scala
+@Given("a book with the title $title, written by $author, published on $published")
+@Alias("another book with the title $title, written by $author, published on $published")
+def addNewBook(title: String, author: String, published: String) {
+  this.library.addBook(new Book(title, author, LocalDate.parse(published, dateFormatter)))
+}
+```
+When using Scala the Java JBehave annotations still have to be used. The combination of JBehave and Scala is only reasonable when
+it is used in a scenario where there is a real advantage of using a Scala test library like ScalaTest instead of a Java based one like JUnit.
 
 ###Plain ScalaTest
 Unlike Cucumber and JBehave ScalaTest doesn't use separate files for feature and scenario description and implementation.
