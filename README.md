@@ -1,7 +1,4 @@
 # Behavior Driven Development Tutorial
-
----
-
 ## Branches
 - __master__: irrelevant
 - __cucumber_java__: Features in [Cucumber](https://cucumber.io/) and implementation in Java
@@ -11,17 +8,11 @@
 - __jbehave_scala__: Features in [JBehave](http://jbehave.org/) and implementation in Scala
 - __plain_scalatest__: Features and implementation combined in Scala / [ScalaTest](http://www.scalatest.org/)
 
----
-
 ## Running the tests
 All tests are run with the Gradle __test__ task. In order to generate the html reports when using Serenity just run the Gradle __aggregate__ task after running the __test__ task.
 
----
-
 ##Trouble shooting
 Sometimes it's helpful to run the Gradle __clean__ task if the application behaves strangely after switching between branches.
-
----
 
 ##Evaluation
 ###Cucumber with Java
