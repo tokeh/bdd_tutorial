@@ -17,7 +17,6 @@ Sometimes it's helpful to run the Gradle __clean__ task if the application behav
 ##Evaluation
 ###Cucumber with Java
 Features are written in *Gherkin* and stores in *.feature* files. Gherkin uses the BDD *Given-When-Then* pattern:
-
 ```
 Feature: Book search
   To allow a customer to find his favourite books quickly, the library must offer multiple ways to search for a book.
@@ -42,7 +41,6 @@ is quite easy because all scenarios that can't be matched are highlighted in the
 
 ###Cucumber with Scala
 Features are written in *Gherkin* and stores in *.feature* files. Gherkin uses the BDD *Given-When-Then* pattern:
-
 ```
 Feature: Book search
   To allow a customer to find his favourite books quickly, the library must offer multiple ways to search for a book.
@@ -57,14 +55,31 @@ Feature: Book search
 The mapping between scenarios and implementation is achieved by the *Cucumber Scala DSL (Given-When-Then)* and *pattern matching*. The mapping from scenario values to parameters is
 done the same way. That allows writing steps (e.g. __Given__... __And__...) that have the same text but different values and mapping them to the same implementation.
 The usage of ScalaTest allows an easier and better readable test implementation.
+```scala
+Given(""".+book with the title '(.+)', written by '(.+)', published on (.+)""") {
+  (title: String, author: String, published: String) =>
+    this.library.addBook(new Book(title, author, LocalDate.parse(published, dateFormatter)))
+}
+```
+The only disadvantage is that if scenarios are changed the texts of the annotations in the implementation have to be changed as well. Finding the texts that have to be changed
+is quite easy because all scenarios that can't be matched are highlighted in the editor (if the right plug-ins are installed) and the corresponding tests are failing.
 
 ###JBehave with Java
+```java
 
+```
 
 ###JBehave with Java and Serenity
+```java
 
+```
 
 ###Jbehave with Scala
+```scala
 
+```
 
 ###Plain ScalaTest
+```scala
+
+```
