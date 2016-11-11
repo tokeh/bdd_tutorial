@@ -15,10 +15,11 @@ run the Gradle __aggregate__ task after running the __test__ task.
 
 ##Trouble shooting
 Sometimes it's helpful to run the Gradle __clean__ task if the application behaves strangely after switching between branches.
+These examples are only tested in IntelliJ IDEA Community Edition.
 
 ##Evaluation
 ###Cucumber with Java
-Features are written in *Gherkin* and stores in *.feature* files. Gherkin uses the BDD *Given-When-Then* pattern:
+Features are written in *Gherkin* and stored in *.feature* files. Gherkin uses the BDD *Given-When-Then* pattern:
 ```
 Feature: Book search
   To allow a customer to find his favourite books quickly, the library must offer multiple ways
@@ -45,7 +46,7 @@ as well. Finding the texts that have to be changed is quite easy because all sce
 in the editor (if the right plug-ins are installed) and the corresponding tests are failing.
 
 ###Cucumber with Scala
-Features are written in *Gherkin* and stores in *.feature* files. Gherkin uses the BDD *Given-When-Then* pattern:
+Features are written in *Gherkin* and stored in *.feature* files. Gherkin uses the BDD *Given-When-Then* pattern:
 ```
 Feature: Book search
   To allow a customer to find his favourite books quickly, the library must offer multiple ways
@@ -60,7 +61,7 @@ Feature: Book search
 ```
 The mapping between scenarios and implementation is achieved by the *Cucumber Scala DSL (Given-When-Then)* and *pattern matching*.
 The mapping from scenario values to parameters is done the same way. That allows writing steps (e.g. __Given__... __And__...) that
-have the same text but different values and mapping them to the same implementation. The usage of ScalaTest allows an easier and
+have the same text but different values and mapping them to the same implementation. The usage of *ScalaTest* allows an easier and
 better readable test implementation.
 ```scala
 Given(""".+book with the title '(.+)', written by '(.+)', published on (.+)""") {
@@ -73,8 +74,8 @@ Finding the texts that have to be changed is quite easy because all scenarios th
 (if the right plug-ins are installed) and the corresponding tests are failing.
 
 ###JBehave with Java
-JBehave uses .story files to store the different scenarios. Just like Cucumber features they are written in native language and
-use the BDD *Given-When-THen* pattern:
+JBehave uses *.story* files to store the different scenarios. Just like Cucumber features they are written in native language and
+use the BDD *Given-When-Then* pattern:
 ```
 Meta:
 
@@ -126,8 +127,8 @@ public void addNewBook(final String title, final String author, final String pub
 ```
 
 ###JBehave with Java and Serenity
-JBehave uses .story files to store the different scenarios. Just like Cucumber features they are written in native language and
-use the BDD *Given-When-THen* pattern:
+JBehave uses *.story* files to store the different scenarios. Just like Cucumber features they are written in native language and
+use the BDD *Given-When-Then* pattern:
 ```
 Meta:
 
@@ -146,9 +147,9 @@ And Book 1 should have the title 'Some other book'
 And Book 2 should have the title 'One good book'
 ```
 In addition to the *narrative* part of the *.story* files all parts like *features*, *capabilities*, etc. can have narrative.txt
-which contain a description in native language. These descriptions are added to the report by Serenity.
+files which contain a description in native language. These descriptions are used for the test reports by Serenity.
 
-Serenity takes care of a lot of the configuration glue code. Only an empty JUnit runner that extends SerenityStories is needed.
+Serenity takes care of a lot of the configuration glue code. Only an empty *JUnit runner* that extends *SerenityStories* is needed.
 ```java
 public class AcceptanceTests extends SerenityStories { }
 ```
@@ -162,7 +163,7 @@ public void addNewBook(final String title, final String author, final String pub
 }
 ```
 The implementation of the scenario steps looks almost like the one of plain JBehave. Unlike the plain JBehave code this implementation
-is calling the reusable Serenity *steps* on the *@Step* object instead of calling all the test code directly.
+is calling the reusable Serenity *Steps* on the *@Step* object instead of calling all the test code directly.
 ```java
 @Steps
 BookSearchSteps bookSearch;
@@ -185,6 +186,11 @@ Implementation
 ```
 
 ###Plain ScalaTest
+Unlike Cucumber and JBehave ScalaTest doesn't use separate files for feature and scenario description and implementation.
+In ScalaTest all these parts are combined in one place. This comes in handy if descriptions are changed so they only have
+to be changed in one place. The downside is that it is not as readable as Cucumber feature files or JBehave story files,
+especially for non-technical folks. Another, and possibly even bigger, downside is that ScalaTest isn't compatible to Serenity,
+which is excellent for reporting.
 ```scala
 feature("Book search") {
   info("To allow a customer to find his favourite books quickly,")
