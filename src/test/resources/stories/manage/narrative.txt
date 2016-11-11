@@ -1,0 +1,6 @@
+Manage books
+
+Narrative:
+As an administrator
+I want to manage the books that are available in the library
+So that users can search for and borrow them

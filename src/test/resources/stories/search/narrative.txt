@@ -1,0 +1,6 @@
+Search books
+
+Narrative:
+As a user
+I want to search books that are available in the library
+So that I don't have to look through all books individually
