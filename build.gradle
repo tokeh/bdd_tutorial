@@ -9,9 +9,15 @@ sourceCompatibility = 1.8
 
 def serenity_version = "1.1.42"
 
+repositories {
+  mavenCentral()
+  jcenter()
+}
+
 buildscript {
   repositories {
     mavenCentral()
+    jcenter()
   }
   dependencies {
     classpath("net.serenity-bdd:serenity-gradle-plugin:1.1.42")
