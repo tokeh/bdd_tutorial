@@ -45,6 +45,48 @@ The only disadvantage is that if scenarios are changed the texts of the annotati
 as well. Finding the texts that have to be changed is quite easy because all scenarios that can't be matched are highlighted
 in the editor (if the right plug-ins are installed) and the corresponding tests are failing.
 
+###Cucumber with Java and Serenity
+Features are written in *Gherkin* and stored in *.feature* files. Gherkin uses the BDD *Given-When-Then* pattern:
+```
+Feature: Book search
+  To allow a customer to find his favourite books quickly, the library must offer multiple ways
+  to search for a book.
+
+  Scenario: Search books by publication year
+    Given a book with the title 'One good book', written by 'Anonymous', published on 14.03.2013
+    And another book ...
+    When the customer searches for books published between 2013 and 2014
+    Then 2 books should have been found
+    And Book 1 should have the title 'Some other book'
+```
+Serenity takes care of a lot of the configuration glue code. Only an empty *JUnit runner* per feature is needed.
+The runner contains the path to the feature file. The runner has to be in the same package as the implementation.
+```java
+@RunWith(CucumberWithSerenity.class)
+@CucumberOptions(features = "src/test/resources/features/search/book_search.feature")
+public class SearchTests { }
+```
+Serenity extends Cucumber in a way that not only *Given-When-Then* steps can be used but also Serenity *Steps*. These steps are
+small reusable chunks of code that are grouped in a normal Java class. This concept supports maintainability and flexibility
+especially in large code bases.
+```java
+@Step
+public void addNewBook(final String title, final String author, final String published) {
+  this.library.addBook(new Book(title, author, LocalDate.parse(published, dateTimeFormatter)));
+}
+```
+The implementation of the scenario steps looks almost like the one of plain Cucumber. Unlike the plain Cucumber code this implementation
+is calling the reusable Serenity *Steps* on the *@Step* object instead of calling all the test code directly.
+```java
+@Steps
+BookSearchSteps bookSearch;
+
+@Given(".+book with the title '(.+)', written by '(.+)', published on (.+)")
+public void addNewBook(final String title, final String author, final String published) {
+  this.bookSearch.addNewBook(title, author, published);
+}
+```
+
 ###Cucumber with Scala
 Features are written in *Gherkin* and stored in *.feature* files. Gherkin uses the BDD *Given-When-Then* pattern:
 ```
