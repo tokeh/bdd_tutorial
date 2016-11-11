@@ -65,16 +65,35 @@ The only disadvantage is that if scenarios are changed the texts of the annotati
 is quite easy because all scenarios that can't be matched are highlighted in the editor (if the right plug-ins are installed) and the corresponding tests are failing.
 
 ###JBehave with Java
+Glue code
+```java
+
+```
+Implementation
 ```java
 
 ```
 
 ###JBehave with Java and Serenity
+Glue code
+```java
+
+```
+Reusable Steps
+```java
+
+```
+Step definitions
 ```java
 
 ```
 
-###Jbehave with Scala
+###JBehave with Scala
+Glue code
+```scala
+
+```
+Implementation
 ```scala
 
 ```
