@@ -9,6 +9,11 @@ reporting with [Serenity](http://www.thucydides.info/docs/serenity/)
 - __jbehave_scala__: Features in [JBehave](http://jbehave.org/) and implementation in Scala
 - __plain_scalatest__: Features and implementation combined in Scala/[ScalaTest](http://www.scalatest.org/)
 
+## Import Projects
+Tested in IntelliJ IDEA 2016.1.4
+Click __import project__, choose the project's directory and click *OK*, choose __import project from external model__
+and __Gradle__ and click *next*, leave the settings like they are (__use default gradle wrapper__) and click *finish*
+
 ## Running the tests
 All tests are run with the Gradle __test__ task. In order to generate the html reports when using Serenity just
 run the Gradle __aggregate__ task after running the __test__ task.
