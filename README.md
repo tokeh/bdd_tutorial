@@ -11,8 +11,11 @@ reporting with [Serenity](http://www.thucydides.info/docs/serenity/)
 
 ## Import Projects
 Tested in IntelliJ IDEA 2016.1.4
-Click __import project__, choose the project's directory and click *OK*, choose __import project from external model__
-and __Gradle__ and click *next*, leave the settings like they are (__use default gradle wrapper__) and click *finish*.
+
+- Click __import project__, choose the project's directory and click *OK*
+- choose __import project from external model__ and __Gradle__ and click *next*
+- leave the settings like they are (__use default gradle wrapper__) and click *finish*.
+
 For projects containing Scala code the IDEA Scala Plugin is recommended.
 
 ## Running the tests
