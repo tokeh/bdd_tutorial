@@ -25,10 +25,16 @@ class BookSearchStepsScala extends ScalaDsl with EN {
   }
 
   Then("""(\d+) books should have been found$""") {
-    (booksFound: Int) => result.size should equal(booksFound)
+    (booksFound: Int) =>
+      result should {
+        not be empty and
+          have size booksFound
+      }
   }
 
   And("""Book (\d+) should have the title '(.+)'$""") {
-    (position: Int, title: String) => result.get(position - 1).getTitle should equal (title)
+    (position: Int, title: String) =>
+      result should not be empty
+      result.get(position - 1).getTitle should be (title)
   }
 }
