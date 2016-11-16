@@ -23,8 +23,10 @@ All tests are run with the Gradle __test__ task. In order to generate the html r
 run the Gradle __aggregate__ task after running the __test__ task.
 
 ##Trouble shooting
-Sometimes it's helpful to run the Gradle __clean__ task if the application behaves strangely after switching between branches.
 These examples are only tested in IntelliJ IDEA Community Edition.
+
+Sometimes it's helpful to run the Gradle __clean__ task if the application behaves strangely after switching between branches.
+
 If executing the Gradle goals *test* or *build* leads to an __gradle invalid source release 1.8__ error please change under *settings/
 Build, Execution, Deployment/Build Tools/Gradle* the value of *Gradle JVM* to __Use Project JDK__.
 
