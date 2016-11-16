@@ -34,11 +34,15 @@ class BookSearchSteps {
 
   @Then("$booksFound books should have been found")
   def verifyAmountOfBooksFound(booksFound: Int) {
-    result.size should equal(booksFound)
+    result should {
+      not be empty and
+        have size booksFound
+    }
   }
 
   @Then("Book $position should have the title $title")
   def verifyBookAtPosition(position: Int, title: String) {
-    result.get(position - 1).getTitle should equal (title)
+    result should not be empty
+    result.get(position - 1).getTitle should be (title)
   }
 }
