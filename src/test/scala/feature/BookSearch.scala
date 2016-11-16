@@ -33,11 +33,17 @@ class BookSearch extends FeatureSpec with GivenWhenThen {
         result = library.findBooks(LocalDate.now().withYear(2013), LocalDate.now().withYear(2014))
 
       Then("2 books should have been found")
-        result.size should equal(2)
+        result.size should be(2)
       And("Book 1 should have the title 'Some other book'")
-        result.get(0).getTitle should equal ("Some other book")
+        result.get(0).getTitle should {
+          not be empty and
+            be ("Some other book")
+        }
       And("Book 2 should have the title 'One good book'")
-        result.get(1).getTitle should equal ("One good book")
+        result.get(1).getTitle should {
+          not be empty and
+            be ("One good book")
+        }
     }
   }
 }
