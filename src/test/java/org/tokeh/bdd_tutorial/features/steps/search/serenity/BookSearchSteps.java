@@ -35,4 +35,14 @@ public class BookSearchSteps {
   public void verifyBookAtPosition(final int position, final String title) {
     assertEquals(result.get(position - 1).getTitle(), title);
   }
+
+  @Step
+  public void searchByAuthor(final String author) {
+    result = library.findBooksByAuthor(author);
+  }
+
+  @Step
+  public void verifyAuthorAtPosition(final int position, final String author) {
+    assertEquals(result.get(position - 1).getAuthor(), author);
+  }
 }
