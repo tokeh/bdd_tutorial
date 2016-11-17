@@ -32,4 +32,19 @@ public class Library {
         Integer.compare(book2.getPublished().getYear(), book1.getPublished().getYear()));
     return list;
   }
+
+  public ArrayList<Book> findBooksByAuthor(final String author) {
+    ArrayList<Book> list = new ArrayList<Book>();
+    for (Map.Entry entry : this.books.entrySet()) {
+      Book book = (Book) entry.getValue();
+
+      if (book.getAuthor().equals(author)) {
+        list.add(book);
+      }
+    }
+
+    Collections.sort(list, (Book book1, Book book2) ->
+        Integer.compare(book2.getPublished().getYear(), book1.getPublished().getYear()));
+    return list;
+  }
 }
