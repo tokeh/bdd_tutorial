@@ -43,13 +43,22 @@ public class BookSearchStepDefinitions {
     this.bookSearch.verifyAuthorAtPosition(position, author);
   }
 
+  /*
+   * OR: tags comma separated in one string
+   * AND: tags comma separated in separate strings (~ for NOT)
+   */
   @Before("@test#1")
-  public void beforeScenario() {
-    System.out.println("This happened before scenario 'Search books by publication year'");
+  public void beforeScenarioTest1() {
+    System.out.println("This happened before scenario tagged with @test#1");
   }
 
-  @After("@test#2")
-  public void afterScenario() {
-    System.out.println("This happened after scenario 'Search books by author'");
+  @After("@test#1, @test#2")
+  public void afterScenarioTest2() {
+    System.out.println("This happened after scenario tagged with @test#1 OR @test#2");
+  }
+
+  @Before({"@test#1", "~@test#2"})
+  public void beforeScenarioTest3() {
+    System.out.println("This happened before scenario tagged with @test#1 AND NOT @test#2");
   }
 }
