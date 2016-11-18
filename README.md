@@ -68,6 +68,7 @@ Feature: Book search
   To allow a customer to find his favourite books quickly, the library must offer multiple ways
   to search for a book.
 
+  @test#1
   Scenario: Search books by publication year
     Given a book with the title 'One good book', written by 'Anonymous', published on 14.03.2013
     And another book ...
@@ -79,12 +80,16 @@ Serenity takes care of a lot of the configuration glue code. Only an empty *JUni
 The runner contains the path to the feature file. The runner has to be in the same package as the implementation.
 ```java
 @RunWith(CucumberWithSerenity.class)
-@CucumberOptions(features = "src/test/resources/features/search/book_search.feature")
+@CucumberOptions(
+    features = "src/test/resources/features/search/book_search.feature",
+    plugin = "pretty",
+    tags = {"@test#1"}
+)
 public class SearchTests { }
 ```
 Serenity extends Cucumber in a way that not only *Given-When-Then* steps can be used but also Serenity *Steps*. These steps are
 small reusable chunks of code that are grouped in a normal Java class. This concept supports maintainability and flexibility
-especially in large code bases.
+especially in large code bases. In addition to that features and scenarios can be tagged what allows filtered execution. 
 ```java
 @Step
 public void addNewBook(final String title, final String author, final String published) {
@@ -101,8 +106,21 @@ BookSearchSteps bookSearch;
 public void addNewBook(final String title, final String author, final String published) {
   this.bookSearch.addNewBook(title, author, published);
 }
+
+/*
+ * OR: tags comma separated in one string
+ * AND: tags comma separated in separate strings (~ for NOT)
+ */
+@Before("@test#1")
+public void beforeScenarioTest1() {
+  System.out.println("This happened before scenario tagged with @test#1");
+}
 ```
-The Serenity report can be found under __/target/site/serenity/index.html__
+Cucumber also supports the usage of hook methods. They can be used before and after steps, scenarios or features. Those hooks can also
+be combined with tags in order to execute them only before/after steps/scenarios/features that are tagged with the according tags.
+Tags can be connected with logic AND (tags as separate strings separated by commas) with logic OR (tags in single string separated by commas)
+and logic NOT (~ before tag).  
+The Serenity report can be found under __/target/site/serenity/index.html__.
 
 ###Cucumber with Scala
 Features are written in *Gherkin* and stored in *.feature* files. Gherkin uses the BDD *Given-When-Then* pattern:
