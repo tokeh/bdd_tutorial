@@ -1,6 +1,6 @@
 Meta:
 @author Tobias
-@tags test: testTag, feature: testFeatureTag
+@tags testTag1: tag1, testTag2: tag2
 
 Narrative:
 As a user
