@@ -30,8 +30,9 @@ dependencies {
   testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.21'
   testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
 
-  compile group: 'info.cukes', name: 'cucumber-java', version: '1.2.5'
-  compile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.5'
+  testCompile group: 'info.cukes', name: 'cucumber-java', version: '1.2.5'
+  testCompile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.5'
+  testCompile group: 'info.cukes', name: 'cucumber-jruby', version: '1.2.5'
 
   testCompile group: 'net.serenity-bdd', name: 'serenity-core', version: serenity_version
   testCompile group: 'net.serenity-bdd', name: 'serenity-junit', version: serenity_version
