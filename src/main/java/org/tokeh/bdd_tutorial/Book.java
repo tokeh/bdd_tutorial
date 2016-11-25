@@ -20,4 +20,8 @@ public class Book {
   public LocalDate getPublished() {
     return this.published;
   }
+
+  public String getAuthor() {
+    return this.author;
+  }
 }
