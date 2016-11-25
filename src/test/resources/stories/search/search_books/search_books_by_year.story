@@ -8,7 +8,7 @@ So that I can see what books are available that have been published in a certain
 
 Scenario: Some books have been found
 Meta:
-@path happy_path
+@tag path: happy_path
 Given a book with the title 'One good book', written by 'Anonymous', published on 14.03.2013
 And another book with the title 'Some other book', written by 'Tim Tomson', published on 23.08.2014
 And another book with the title 'How to cook a dino', written by 'Fred Flintstone', published on 01.01.2012
@@ -19,7 +19,7 @@ And Book 2 should have the title 'One good book'
 
 Scenario: No books have been found
 Meta:
-@path special_case
+@tag path: special_case
 Given a book with the title 'One good book', written by 'Anonymous', published on 14.03.2013
 And another book with the title 'Some other book', written by 'Tim Tomson', published on 23.08.2014
 And another book with the title 'How to cook a dino', written by 'Fred Flintstone', published on 01.01.2012
@@ -28,7 +28,7 @@ Then 0 books should have been found
 
 Scenario: All books have been found
 Meta:
-@path special_case
+@tag path: special_case
 Given a book with the title 'One good book', written by 'Anonymous', published on 14.03.2013
 And another book with the title 'Some other book', written by 'Tim Tomson', published on 23.08.2014
 And another book with the title 'How to cook a dino', written by 'Fred Flintstone', published on 01.01.2012
