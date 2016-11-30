@@ -1,6 +1,3 @@
-Meta:
-@tag author: Tobias
-
 Narrative:
 As a user
 I want to find authors whose books are in the library
@@ -8,7 +5,9 @@ So that I don't have to look through all books individually
 
 Scenario: Author has been found
 Meta:
-@tag path: happy_path
+@tags path: happy_path, type: scenario
+@path happy_path
+@type scenario
 
 Given a book with the title 'One good book', written by 'Anonymous', published on 14.03.2013
 And another book with the title 'Some other book', written by 'Tim Tomson', published on 23.08.2014
@@ -19,7 +18,9 @@ And author 1 should have the name 'Tim Tomson'
 
 Scenario: Author has not been found
 Meta:
-@tag path: special_case
+@tags path: special_case, type: scenario
+@path special_case
+@type scenario
 
 Given a book with the title 'One good book', written by 'Anonymous', published on 14.03.2013
 And another book with the title 'Some other book', written by 'Tim Tomson', published on 23.08.2014
@@ -29,7 +30,9 @@ Then 0 authors should have been found
 
 Scenario: Find all authors
 Meta:
-@tag path: special_case
+@tags path: special_case, type: scenario
+@path special_case
+@type scenario
 
 Given a book with the title 'One good book', written by 'Anonymous', published on 14.03.2013
 And another book with the title 'Some other book', written by 'Tim Tomson', published on 23.08.2014
