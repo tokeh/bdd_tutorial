@@ -1,9 +1,8 @@
 package org.tokeh.bdd_tutorial.steps.search.search_books;
 
+import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Steps;
-import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Then;
-import org.jbehave.core.annotations.When;
+import org.jbehave.core.annotations.*;
 
 public class BookSearchStepDefinitions {
 
@@ -12,6 +11,12 @@ public class BookSearchStepDefinitions {
 
   @Given("{a|another} book with the title '$title', written by '$author', published on $published")
   public void addNewBook(final String title, final String author, final String published) {
+    this.search.addNewBook(title, author, published);
+  }
+
+  @Given("a book with the title <title>, written by <author>, published on <published>")
+  public void addNewBookParameterized(@Named("title") String title, @Named("author") String author, @Named("published") String published) {
+    Serenity.getCurrentSession().clear();
     this.search.addNewBook(title, author, published);
   }
 
@@ -28,6 +33,11 @@ public class BookSearchStepDefinitions {
   @Then("Book $position should have the title '$title'")
   public void verifyBookAtPosition(final int position, final String title) {
     this.search.verifyBookAtPosition(position, title);
+  }
+
+  @Then("a Book with the title <title> published on <published> should have been found")
+  public void verifyBookAtPositionParameterized(@Named("title") String title, @Named("published") String published) {
+    this.search.verifyBookAtFirstPosition(title, published);
   }
 
   @When("the customer searches for books written by '$author'")

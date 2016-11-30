@@ -5,6 +5,7 @@ import net.thucydides.core.annotations.Step;
 import org.tokeh.bdd_tutorial.Book;
 import org.tokeh.bdd_tutorial.Library;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -34,6 +35,12 @@ public class SearchSteps {
   @Step
   public void verifyBookAtPosition(final int position, final String title) {
     assertEquals(this.getBookResults().get(position - 1).getTitle(), title);
+  }
+
+  @Step
+  public void verifyBookAtFirstPosition(final String title, final String published) {
+    assertEquals(this.getBookResults().get(0).getTitle(), title);
+    assertEquals(this.getBookResults().get(0).getPublished().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), published);
   }
 
   @Step
