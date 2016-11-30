@@ -6,8 +6,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-    features = "src/test/resources/features/search/book_search.feature",
+    features = "src/test/resources/features",
     plugin = "pretty",
-    tags = {"@test#1"}
+    tags = {}
 )
-public class SearchTests { }
+public class AcceptanceTests { }
