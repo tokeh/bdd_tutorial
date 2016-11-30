@@ -7,5 +7,5 @@ import net.serenitybdd.jbehave.annotations.Metafilter;
 // groovy: path == 'happy_path' && type == 'scenario'
 // Standard filter:
 // +path happy_path +type scenario -type dummy
-@Metafilter("groovy: path == 'happy_path' && type == 'scenario'")
+@Metafilter("-type given")
 public class AcceptanceTests extends SerenityStories { }
