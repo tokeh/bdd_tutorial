@@ -23,7 +23,7 @@ Feature: Search books by year
 
   @path_special_case @type_scenario
   Scenario Outline: All books have been found
-    Given a book with the title <title>, written by <author>, published on <published>
+    Given a book with the title <title>, published on <published>, written by <author>
     When the customer searches for books published between 2012 and 2014
     Then a Book with the title <title> published on <published> should have been found
 

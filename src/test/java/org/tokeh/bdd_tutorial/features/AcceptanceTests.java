@@ -1,4 +1,4 @@
-package org.tokeh.bdd_tutorial.features.steps.search;
+package org.tokeh.bdd_tutorial.features;
 
 import cucumber.api.CucumberOptions;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
