@@ -2,13 +2,15 @@ package org.tokeh.bdd_tutorial.features.steps.search.search_books;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Steps;
+import org.tokeh.bdd_tutorial.Book;
 import org.tokeh.bdd_tutorial.features.steps.search.serenity.SearchSteps;
+
+import java.util.List;
 
 public class BookSearchStepDefinitions {
   @Steps
@@ -17,6 +19,12 @@ public class BookSearchStepDefinitions {
   @Given("^a library with books$")
   public void ensureLibraryIsPresentAndFilled() {
     this.search.ensureLibraryIsPresentAndFilled();
+  }
+
+  // Data table as list of lists. First row is ommitted because it contains the column titles.
+  @Given("^the library contains the following books:$")
+  public void addBooksAsTable(final List<List<String>> books) {
+    this.search.addNewBooks(books.subList(1, books.size()));
   }
 
   @Given("^.+book with the title '(.+)', written by '(.+)', published on (.+)$")
