@@ -10,6 +10,11 @@ public class BookSearchStepDefinitions {
   @Steps
   SearchSteps search;
 
+  @Given("a library with books")
+  public void ensureLibraryIsPresentAndPopulated() {
+    this.search.ensureLibraryIsPresentAndPopulated();
+  }
+
   @Given("{a|another} book with the title '$title', written by '$author', published on $published")
   public void addNewBook(final String title, final String author, final String published) {
     this.search.addNewBook(title, author, published);

@@ -70,4 +70,8 @@ public class Library {
     Collections.sort(list);
     return list;
   }
+
+  public int getNumberOfBooks() {
+    return this.books.size();
+  }
 }
