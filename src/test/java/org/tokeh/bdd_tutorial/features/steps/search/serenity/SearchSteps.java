@@ -1,5 +1,6 @@
 package org.tokeh.bdd_tutorial.features.steps.search.serenity;
 
+import cucumber.api.DataTable;
 import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
@@ -9,6 +10,7 @@ import org.tokeh.bdd_tutorial.Library;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -32,6 +34,15 @@ public class SearchSteps {
     Library library = this.getLibrary();
     for (List<String> entry: books) {
       library.addBook(new Book(entry.get(0), entry.get(1), entry.get(2)));
+    }
+    this.storeLibrary(library);
+  }
+
+  @Step
+  public void addNewBooks(final DataTable books) {
+    Library library = this.getLibrary();
+    for (Map<String, String> row : books.asMaps(String.class, String.class)) {
+      library.addBook(new Book(row.get("title"), row.get("author"), row.get("published")));
     }
     this.storeLibrary(library);
   }

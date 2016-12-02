@@ -1,5 +1,6 @@
 package org.tokeh.bdd_tutorial.features.steps.search.search_books;
 
+import cucumber.api.DataTable;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -23,8 +24,8 @@ public class BookSearchStepDefinitions {
 
   // Data table as list of lists. First row is ommitted because it contains the column titles.
   @Given("^the library contains the following books:$")
-  public void addBooksAsTable(final List<List<String>> books) {
-    this.search.addNewBooks(books.subList(1, books.size()));
+  public void addBooksAsTable(final DataTable books) {
+    this.search.addNewBooks(books);
   }
 
   @Given("^.+book with the title '(.+)', written by '(.+)', published on (.+)$")
