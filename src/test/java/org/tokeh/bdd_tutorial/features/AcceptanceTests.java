@@ -8,6 +8,6 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
     features = "src/test/resources/features",
     plugin = "pretty",
-    tags = {}
+    tags = {"@path_special_case, @path_happy_path", "~@type_dummy"}
 )
 public class AcceptanceTests { }
