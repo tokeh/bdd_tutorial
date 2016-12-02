@@ -2,6 +2,7 @@ package org.tokeh.bdd_tutorial.steps.search.search_books;
 
 import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Step;
+import org.jbehave.core.model.ExamplesTable;
 import org.tokeh.bdd_tutorial.Book;
 import org.tokeh.bdd_tutorial.Library;
 
@@ -9,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -20,6 +22,13 @@ public class SearchSteps {
     Library library = this.getLibrary();
     library.addBook(new Book(title, author, LocalDate.parse(published, dateTimeFormatter)));
     this.storeLibrary(library);
+  }
+
+  @Step
+  public void addNewBooks(final ExamplesTable books) {
+    for (Map<String, String> row : books.getRows()) {
+      this.addNewBook(row.get("title"), row.get("author"), row.get("published"));
+    }
   }
 
   @Step

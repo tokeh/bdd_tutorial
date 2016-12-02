@@ -3,6 +3,7 @@ package org.tokeh.bdd_tutorial.steps.search.search_books;
 import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.*;
+import org.jbehave.core.model.ExamplesTable;
 
 public class BookSearchStepDefinitions {
 
@@ -12,6 +13,11 @@ public class BookSearchStepDefinitions {
   @Given("{a|another} book with the title '$title', written by '$author', published on $published")
   public void addNewBook(final String title, final String author, final String published) {
     this.search.addNewBook(title, author, published);
+  }
+
+  @Given("the library contains the following books:$")
+  public void addBooksAsTable(final ExamplesTable books) {
+    this.search.addNewBooks(books);
   }
 
   @Given("a book with the title <title>, written by <author>, published on <published>")
