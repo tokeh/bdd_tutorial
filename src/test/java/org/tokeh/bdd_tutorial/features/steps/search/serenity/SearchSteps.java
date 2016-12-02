@@ -10,9 +10,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class SearchSteps {
   private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+  @Step
+  public void ensureLibraryIsPresentAndFilled() {
+    Library library = this.getLibrary();
+    assertNotEquals(0, library.getNumberOfBooks());
+  }
 
   @Step
   public void addNewBook(final String title, final String author, final String published) {
