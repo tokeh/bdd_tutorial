@@ -9,7 +9,7 @@ Meta:
 @path happy_path
 @type scenario
 
-GivenStories: stories/search/GivenStories/populate_library.story
+GivenStories: stories/search/given_stories/populate_library.story
 Given a library with books
 When the customer searches for books written by 'Anonymous'
 Then 1 book should have been found
@@ -21,7 +21,7 @@ Meta:
 @path special_case
 @type scenario
 
-GivenStories: stories/search/GivenStories/populate_library.story
+GivenStories: stories/search/given_stories/populate_library.story
 Given a library with books
 When the customer searches for books written by 'Not an author'
 Then 0 book should have been found
