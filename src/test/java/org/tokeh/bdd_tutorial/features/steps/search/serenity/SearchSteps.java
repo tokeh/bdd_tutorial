@@ -30,15 +30,6 @@ public class SearchSteps {
   }
 
   @Step
-  public void addNewBooks(final List<List<String>> books) {
-    Library library = this.getLibrary();
-    for (List<String> entry: books) {
-      library.addBook(new Book(entry.get(0), entry.get(1), entry.get(2)));
-    }
-    this.storeLibrary(library);
-  }
-
-  @Step
   public void addNewBooks(final DataTable books) {
     Library library = this.getLibrary();
     for (Map<String, String> row : books.asMaps(String.class, String.class)) {
