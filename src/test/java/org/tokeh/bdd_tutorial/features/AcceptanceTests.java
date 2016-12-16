@@ -9,6 +9,6 @@ import org.junit.runner.RunWith;
     features = "src/test/resources/features",
     plugin = "pretty",
     //@path_special_case, @path_happy_path", "~@type_dummy
-    tags = {"@jira"}
+    tags = {}
 )
 public class AcceptanceTests { }
