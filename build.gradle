@@ -3,7 +3,6 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'maven'
 apply plugin: 'net.serenity-bdd.aggregator'
 
 sourceCompatibility = 1.8
@@ -42,15 +41,7 @@ dependencies {
   compile group: 'net.serenity-bdd', name: 'serenity-junit', version: serenity_version
   compile group: 'net.serenity-bdd', name: 'serenity-cucumber', version: '1.1.11'
   compile group: 'net.serenity-bdd', name: 'serenity-gradle-plugin', version: serenity_version
-  testRuntime group: 'net.serenity-bdd', name: 'serenity-jira-plugin', version: '1.1.1'
-  testRuntime group: 'net.serenity-bdd', name: 'serenity-jira-requirements-provider', version: '1.1.1'
-  testRuntime 'net.serenity-bdd:serenity-jira-customfield-requirements-provider:1.1.1'
-}
-
-buildscript {
-  dependencies {
-    classpath group: 'net.serenity-bdd', name: 'serenity-jira-plugin', version: '1.1.1'
-    classpath group: 'net.serenity-bdd', name: 'serenity-jira-requirements-provider', version: '1.1.1'
-    classpath 'net.serenity-bdd:serenity-jira-customfield-requirements-provider:1.1.1'
-  }
+  compile group: 'net.serenity-bdd', name: 'serenity-jira-plugin', version: '1.1.1'
+  compile group: 'net.serenity-bdd', name: 'serenity-jira-requirements-provider', version: '1.1.1'
+  compile group: 'net.serenity-bdd', name: 'serenity-jira-customfield-requirements-provider', version: '1.1.1'
 }
