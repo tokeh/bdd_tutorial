@@ -2,16 +2,12 @@
 .idea/workspace.xml
 .idea/tasks.xml
 
-BDD_Cucumber.iml
 .idea/.name
 .idea/compiler.xml
 .idea/misc.xml
 .idea/modules.xml
 .idea/scala_compiler.xml
 .idea/vcs.xml
-.idea/modules/BDD_Cucumber.iml
-.idea/modules/BDD_Cucumber_main.iml
-.idea/modules/BDD_Cucumber_test.iml
 
 # Sensitive or high-churn files:
 .idea/dataSources/
@@ -25,7 +21,6 @@ BDD_Cucumber.iml
 # Gradle:
 .idea/gradle.xml
 .idea/libraries
-.gradle/2.13/taskArtifacts/
 
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml
@@ -54,3 +49,7 @@ fabric.properties
 /build/
 /target/
 .gradle/
+.idea/modules/
+
+# Serenity
+serenity.properties
