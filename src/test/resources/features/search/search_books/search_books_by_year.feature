@@ -1,4 +1,3 @@
-@jira
 @issue:BDDTHESIS-1
 Feature: Search books by year
   As a user
