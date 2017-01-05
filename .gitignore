@@ -67,3 +67,6 @@ buildNumber.properties
 
 # Serenity
 serenity.properties
+.idea/inspectionProfiles/
+bdd_tutorial.iml
+src/main/resources/
