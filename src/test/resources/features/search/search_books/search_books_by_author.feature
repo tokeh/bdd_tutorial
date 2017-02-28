@@ -1,4 +1,3 @@
-@issue:BDDTHESIS-3
 Feature: Search books by author
   As a user
   I want to find books by author
@@ -10,6 +9,7 @@ Feature: Search books by author
     And another book with the title 'How to cook a dino', written by 'Fred Flintstone', published on 01.01.2012
 
   @path_happy_path @type_scenario
+  @issue:BDDTHESIS-3
   Scenario: All books written by certain author have been found
     Given a library with books
     When the customer searches for books written by 'Anonymous'
@@ -17,6 +17,7 @@ Feature: Search books by author
     And Book 1 should have the title 'One good book'
 
   @path_special_case @type_scenario
+  @issue:BDDTHESIS-1
   Scenario: Author hasn't been found
     Given a library with books
     When the customer searches for books written by 'Not an author'
